@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="container">
+        <h1>PhD Defence Timeline Planner</h1>
+
+        <form action="/" method="post">
+            <!-- Dropdown for selecting university -->
+            <select id="university" name="university">
+                <option value="" disabled selected>Select University:</option>
+                <option value="SLU">SLU</option>
+                <option value="Uppsala university">Uppsala university</option>
+            </select>
+                        
+            <label for="defence_date">Enter Defence Date: </label>
+            <input type="date" id="defence_date" name="defence_date">
+            <input type="submit" value="Calculate">
+        </form>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
+        {% if university == 'SLU' and key_dates %}
+            <div class="timeline">
+                <!-- New code for warning -->
+                {% if warning %}
+                    <p class="error">{{ warning }}</p>
+                {% endif %}
+                <!-- End of new code for warning -->
+                <p><strong>SLU</strong> Public Defence Date: <strong>{{ key_dates['defence_date'].strftime('%Y-%m-%d (%A)') }}</strong></p>
+                <hr>
+                <ol>
+                    <li>At least 6 months before public defence: <strong>{{ key_dates['six_months_before'].strftime('%Y-%m-%d (%A)') }}</strong></li>
+                     <ul>
+                        <li><a href="https://cloud.timeedit.net/slu/web/staff2/ri106muy2n70Z6QY00Q05YgXZQ0w.html">Book a time and date</a>. (Doctoral student)</li>
+                        <li>Make room request <a href="mailto:Lokalbokning@slu.se?subject=Request%20To%20Book%20Room%20For%20PhD%20Defence">here</a>. (Doctoral student)</li>
+                        <li>Contact external reviewer, examining committee, and chairperson. (Main supervisor)</li>
+                    </ul>
+                </li>
+                <li>
+                    At least 3 months before public defence: <strong>{{ key_dates['three_months_before'].strftime('%Y-%m-%d (%A)') }}</strong>
+                    <ul>
+                        <li><a href="https://internt.slu.se/globalassets/mw/utb/forskarutbildningdocent/blanketter-edusign-21/ansokan-om-disputation_230619.pdf">Submit application</a> for public defence. (Doctoral student & Main supervisor)
+                        </li>
+                        <li><a href="https://internt.slu.se/globalassets/mw/utb/forskarutbildningdocent/blanketter-edusign-21/javsdeklaration-v220411.pdf">Declare any conflicts of interest</a>. (Main supervisor)
+                            <br>
+                            <span style="color: rgb(9, 1, 1);"><strong>Caution:</strong> This has to be done before the next faculty-specific FUN meeting:</span>
+                            <ul>
+                                <li>VH: <a href="https://internt.slu.se/en/targeted-info/faculties/faculty-of-veterinary-medicine-and-animal-science/current-affairs/motesoversikt-och-protokoll/">Meetings calender</a></li>
+                                <li>LTV: <a href="https://internt.slu.se/en/targeted-info/faculties/ltv-faculty/current-affairs/meetings-and-protocols/">Meetings calender</a></li>
+                                <li>NJ: <a href="https://internt.slu.se/en/targeted-info/faculties/nj-faculty/current-affairs/meetings-and-protocols/">Meetings calender</a></li>
+                                <li>S: No link 🤷🏾‍♂️</li>
+                            </ul>
+                        </li> 
+                    </ul>
+                </li>
+                <li>
+                    At least 4 weeks before nailing date: <strong>{{ key_dates['four_weeks_before_nailing'].strftime('%Y-%m-%d (%A)') }}</strong>
+                    <ul>
+                        <li>Submit your thesis for printing. (Doctoral student)</li>
+                    </ul>
+                </li>
+                <li>
+                    At least 3 weeks before public defence: <strong>{{ key_dates['three_weeks_before'].strftime('%Y-%m-%d (%A)') }}</strong>
+                    <ul>
+                        <li>Nail/spik your thesis. (Doctor student)</li>
+                        <li>Register thesis in <a href="https://www.slu.se/en/subweb/library/publish-and-analyse/register-and-publish/register-and-publish-your-publications/">SLUpub</a>. (Doctoral student)</li>
+                    </ul>
+                </li>
+            
+                    <li>Day of public defence: <strong>{{ key_dates['defence_date'].strftime('%Y-%m-%d (%A)') }}</strong></li>
+                    <li><strong>Good luck 😊</strong></li>
+                </ol>
+            </div>
+            {% elif university == 'Uppsala university' and key_dates %}
+            <!-- Uppsala University Timeline -->
+            <div class="timeline">
+            <!-- New code for warning -->
+            {% if warning %}
+                <p class="error">{{ warning }}</p>
+            {% endif %}
+            <!-- End of new code for warning -->
+                <p><strong>UU</strong> Public Defence Date: <strong>{{ key_dates['defence_date'].strftime('%Y-%m-%d (%A)') }}</strong></p>
+                <hr>
+                <ol>
+                    <li>At least 5 months before public defence: <strong>{{ key_dates['five_months_before'].strftime('%Y-%m-%d (%A)') }}</strong></li>
+                    <ul>
+                        <li>Book a date in the defence calendar and book a venue. (Doctoral student)</li>
+                        <li>Main supervisor contacts external reviewer and examining committee members. (Main supervisor)</li>
+                    </ul>
+                    <li>At least 14 weeks before public defence: <strong>{{ key_dates['fourteen_weeks_before'].strftime('%Y-%m-%d (%A)') }}</strong></li>
+                    <ul>
+                        <li>Book a time plan for thesis production at the University Library. (Doctoral student)</li>
+                        <li>Official notification of thesis submission and date of public defence must be available. (Doctoral student)</li>
+                    </ul>
+                    <li>At least 12 weeks before public defence: <strong>{{ key_dates['twelve_weeks_before'].strftime('%Y-%m-%d (%A)') }}</strong></li>
+                    <ul>
+                        <li>Submit the application to defend the thesis to the Research Training Committee 11 days before the meeting of that committee. (Doctoral student)</li>
+                    </ul>
+                    <li>At least 7 weeks before public defence: <strong>{{ key_dates['seven_weeks_before'].strftime('%Y-%m-%d (%A)') }}</strong></li>
+                    <ul>
+                        <li>Submit the thesis for production. (Doctoral student)</li>
+                    </ul>
+                    <li>3 weeks before public defence: <strong>{{ key_dates['three_weeks_before'].strftime('%Y-%m-%d (%A)') }}</strong></li>
+                    <ul>
+                        <li>Thesis nailing. (Doctoral student)</li>
+                        <li>Public notification of the date of the defense, send the thesis to the external reviewer, the members of the examining committee, and the chair of the defense ceremony. (Doctoral student)</li>
+                    </ul>
+                    <li>Day of public defence: <strong>{{ key_dates['defence_date'].strftime('%Y-%m-%d (%A)') }}</strong></li>
+                    <ul>
+                        <li>Doctoral defense and examination committee meeting. (Doctoral student, Opponent, & examining committee)</li>
+                    </ul>
+                    <li><strong>Good luck 😊</strong></li>
+                </ol>
+            </div>
+        {% endif %}
+
+        <footer>
+            <p>
+                Created by <a href="https://ruqse.github.io/"><strong>Faruk Dube</strong></a>. For suggestions or features, <a href="mailto:faruk.dube@slu.se?subject=SLU%20PhD%20Defence%20Timeline%20Planner%20Feedback">email me</a>.
+            </p>
+            <!-- Disclaimer at the bottom -->
+            <p class="disclaimer">Disclaimer: This is for informational purposes only. Verify all dates and requirements independently.</p>
+        </footer>
+    </div>
+
+{% endblock content %}
